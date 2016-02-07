@@ -1,6 +1,4 @@
-
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -12,7 +10,7 @@
       </button>
       <!-- Pongo el enlace en la forma de ruby -->
       <%= link_to 'Hermanos Meloy', root_path, class: 'navbar-brand' %>
-      <!--<a class="navbar-brand" href="#">Hermanos Meloy</a>-->
+      <!--<a class="navbar-brand" href="#">Hermanos Meloy</a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,6 +19,13 @@
         <li><%= link_to 'Home', root_path %></li>
         <li><%= link_to 'Sobre nosotros...', home_about_path %></li>
         <li><%= link_to 'Contáctanos', home_contact_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Editar Perfíl', edit_user_registration_path %></li>
+          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Login', new_user_session_path %></li>
+          <li><%= link_to 'Nuevo Usuario', new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
