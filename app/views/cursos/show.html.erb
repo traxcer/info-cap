@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @curso.tipo %>
+</p>
+
+<p>
+  <strong>Comienzo:</strong>
+  <%= @curso.comienzo %>
+</p>
+
+<p>
+  <strong>Final:</strong>
+  <%= @curso.final %>
+</p>
+
+<p>
+  <strong>Turno:</strong>
+  <%= @curso.turno %>
+</p>
+
+<p>
+  <strong>Lugar:</strong>
+  <%= @curso.lugar %>
+</p>
+
+<p>
+  <strong>Cierre:</strong>
+  <%= @curso.cierre %>
+</p>
+
+<%= link_to 'Editar', edit_curso_path(@curso) %> |
+<%= link_to 'Volver', cursos_path %>

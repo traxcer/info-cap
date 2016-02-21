@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo: MyString
+  comienzo: 2016-02-07
+  final: 2016-02-07
+  turno: MyString
+  lugar: MyString
+  cierre: 2016-02-07
+
+two:
+  tipo: MyString
+  comienzo: 2016-02-07
+  final: 2016-02-07
+  turno: MyString
+  lugar: MyString
+  cierre: 2016-02-07
