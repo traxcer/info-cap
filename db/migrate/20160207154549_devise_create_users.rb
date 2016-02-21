@@ -1,4 +1,4 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+BlogPost.find_each(&:destroy)class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Database authenticatable

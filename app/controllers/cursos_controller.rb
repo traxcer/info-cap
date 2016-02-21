@@ -1,5 +1,8 @@
 class CursosController < ApplicationController
   before_action :set_curso, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  
 
   # GET /cursos
   # GET /cursos.json
@@ -14,7 +17,7 @@ class CursosController < ApplicationController
 
   # GET /cursos/new
   def new
-    @curso = Curso.new
+    @curso = current_user.cursos.build
   end
 
   # GET /cursos/1/edit
@@ -24,41 +27,30 @@ class CursosController < ApplicationController
   # POST /cursos
   # POST /cursos.json
   def create
-    @curso = Curso.new(curso_params)
+    @curso = current_user.cursos.build(curso_params)
 
-    respond_to do |format|
       if @curso.save
-        format.html { redirect_to @curso, notice: 'Curso was successfully created.' }
-        format.json { render :show, status: :created, location: @curso }
+        redirect_to @curso, notice: 'El Curso se ha creado.'
       else
-        format.html { render :new }
-        format.json { render json: @curso.errors, status: :unprocessable_entity }
+        render action: 'new'
       end
-    end
   end
 
   # PATCH/PUT /cursos/1
   # PATCH/PUT /cursos/1.json
   def update
-    respond_to do |format|
       if @curso.update(curso_params)
-        format.html { redirect_to @curso, notice: 'Curso was successfully updated.' }
-        format.json { render :show, status: :ok, location: @curso }
+        redirect_to @curso, notice: 'Curso se ha actualizado.'
       else
-        format.html { render :edit }
-        format.json { render json: @curso.errors, status: :unprocessable_entity }
+        render action: 'edit'
       end
-    end
   end
 
   # DELETE /cursos/1
   # DELETE /cursos/1.json
   def destroy
     @curso.destroy
-    respond_to do |format|
-      format.html { redirect_to cursos_url, notice: 'Curso was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to cursos_url, notice: 'Curso se ha destruido.'
   end
 
   private
@@ -71,4 +63,10 @@ class CursosController < ApplicationController
     def curso_params
       params.require(:curso).permit(:tipo, :comienzo, :final, :turno, :lugar, :cierre)
     end
+
+  def correct_user
+    @pin = current_user.cursos.find_by(id: params[:id])
+    redirect_to cursos_path, notice: 'No está autorizado a modifica éste curso' if @pin.nil?
+  end
+
 end
