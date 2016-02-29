@@ -65,8 +65,8 @@ class CursosController < ApplicationController
     end
 
   def correct_user
-    @pin = current_user.cursos.find_by(id: params[:id])
-    redirect_to cursos_path, notice: 'No está autorizado a modifica éste curso' if @pin.nil?
+    @curso = current_user.cursos.find_by(id: params[:id])
+    redirect_to cursos_path, notice: 'No está autorizado a modifica éste curso' if curso.nil?
   end
 
 end
